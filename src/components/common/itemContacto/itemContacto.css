@@ -1,0 +1,41 @@
+.item-contacto {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-normal);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.item-contacto:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-color: var(--text-hover);
+}
+
+.item-contacto img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #f0f2f5;
+}
+
+.item-contacto p:first-of-type {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #202124;
+  margin: 0;
+}
+
+.item-contacto p:last-of-type {
+  font-size: 0.85rem;
+  color: var(--text-default);
+  margin: 0;
+}

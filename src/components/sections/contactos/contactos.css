@@ -1,0 +1,16 @@
+.contactos {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactos h2 {
+  font-size: 1.5rem;
+  color: #202124;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--bg-app);
+  padding-bottom: 10px;
+}
