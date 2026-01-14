@@ -1,4 +1,4 @@
-let Button = (title, id, img) => {
+let Button = (title, id, img, callback) => {
     let div = document.createElement("div");
     div.id = id;
     div.className = "custom-button";
@@ -7,7 +7,6 @@ let Button = (title, id, img) => {
     divImage.className = "button-image";
 
     let imgIcon = document.createElement("img");
-
     imgIcon.src = `./assets/icons/${img}`; 
     
     divImage.appendChild(imgIcon);
@@ -18,6 +17,10 @@ let Button = (title, id, img) => {
 
     div.appendChild(divImage);
     div.appendChild(p);
+
+    if (callback) {
+        div.addEventListener("click", callback);
+    }
 
     return div;
 }
