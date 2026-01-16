@@ -21,4 +21,10 @@ let ContactList = [
     { nombre: "Natalia", apellido: "Cruz", telefono: "12131415" }
 ];
 
-export { ContactList };
+let TaskList = [
+    { titulo: "Comprar suministros", descripcion: "Papel, tinta y café" },
+    { titulo: "Reunión de equipo", descripcion: "Viernes a las 10:00 AM" },
+    { titulo: "Actualizar sitio web", descripcion: "Subir cambios al repositorio" }
+];
+
+export { ContactList, TaskList };

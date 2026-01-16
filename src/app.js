@@ -1,6 +1,8 @@
 import { Button } from "./components/common/button/Button.js";
 import { Contactos } from "./components/sections/contactos/Contactos.js";
 import { FormularioContacto } from "./components/sections/formulario/FormularioContacto.js";
+import { ToDoList } from "./components/sections/todoList/ToDoList.js";
+import { FormularioTarea } from "./components/sections/formularioTarea/FormularioTarea.js";
 
 let app = document.getElementById("app");
 let nav = document.getElementById("nav");
@@ -16,10 +18,20 @@ const loadFormulario = () => {
     container.appendChild(FormularioContacto(loadAgenda));
 };
 
+const loadToDo = () => {
+    container.innerHTML = "";
+    container.appendChild(ToDoList());
+};
+
+const loadFormularioTarea = () => {
+    container.innerHTML = "";
+    container.appendChild(FormularioTarea(loadToDo));
+};
+
 nav.appendChild(Button("Agenda", "agenda", "list.svg", loadAgenda));
 nav.appendChild(Button("Crear Contacto", "btnCrearContacto", "plus.svg", loadFormulario));
-nav.appendChild(Button("ToDo", "todoList", "users.svg"));
-nav.appendChild(Button("Crear Tarea", "plus", "plus.svg"));
+nav.appendChild(Button("ToDo", "todoList", "users.svg", loadToDo));
+nav.appendChild(Button("Crear Tarea", "plus", "plus.svg", loadFormularioTarea));
 
 loadAgenda();
 
