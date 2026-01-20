@@ -1,15 +1,26 @@
-import { Button } from "./components/common/button/Button.js";
-import { Contactos } from "./components/sections/contactos/Contactos.js";
-import { FormularioContacto } from "./components/sections/formulario/FormularioContacto.js";
+import { Contactos } from "../../../components/sections/contactos/Contactos.js";
+import { FormularioContacto } from "../../../components/sections/formulario/FormularioContacto.js";
+import { ToDoList } from "../../../components/sections/todoList/ToDoList.js";
+import { FormularioTarea } from "../../../components/sections/formularioTarea/FormularioTarea.js";
 
-let viewContacts = function () {
+let viewContacts = function (container) {
     container.innerHTML = "";
     container.appendChild(Contactos());
 }
 
-let viewNewContacts = function () {
+let viewNewContacts = function (container, redireccionar) {
     container.innerHTML = "";
-    container.appendChild(FormularioContacto());
+    container.appendChild(FormularioContacto(redireccionar));
 }
 
-export { viewContacts, viewNewContacts };
+let viewToDo = function (container) {
+    container.innerHTML = "";
+    container.appendChild(ToDoList());
+}
+
+let viewNewTask = function (container, redireccionar) {
+    container.innerHTML = "";
+    container.appendChild(FormularioTarea(redireccionar));
+}
+
+export { viewContacts, viewNewContacts, viewToDo, viewNewTask };

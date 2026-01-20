@@ -21,11 +21,19 @@ let ToDoList = () => {
         listaDiv.innerHTML = "";
 
         let taskList = getTasksFromStorage();
+
         taskList.sort((a, b) => a.completada - b.completada);
+
+        if (taskList.length === 0) {
+            let emptyMsg = document.createElement("p");
+            emptyMsg.textContent = "No hay tareas pendientes.";
+            emptyMsg.style.textAlign = "center";
+            emptyMsg.style.color = "#888";
+            listaDiv.appendChild(emptyMsg);
+        }
 
         taskList.forEach(tarea => {
             const item = ItemTarea(tarea, renderTasks);
-            item.classList.add("item-tarea-wrapper");
             listaDiv.appendChild(item);
         });
     };

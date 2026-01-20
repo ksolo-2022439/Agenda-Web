@@ -17,13 +17,26 @@ let Contactos = () => {
     let listaDiv = document.createElement("div");
     listaDiv.id = "lista-items";
 
-    let contactosLista = getContactsFromStorage();
+    const renderContacts = () => {
+        listaDiv.innerHTML = "";
+        let contactosLista = getContactsFromStorage();
 
-    contactosLista.forEach(contacto => {
-        listaDiv.appendChild(
-            ItemContacto("user.svg", `${contacto.nombre} ${contacto.apellido}`, contacto.telefono)
-        );
-    });
+        if (contactosLista.length === 0) {
+            let emptyMsg = document.createElement("p");
+            emptyMsg.textContent = "No tienes contactos guardados.";
+            emptyMsg.style.textAlign = "center";
+            emptyMsg.style.color = "#888";
+            listaDiv.appendChild(emptyMsg);
+        }
+
+        contactosLista.forEach(contacto => {
+            listaDiv.appendChild(
+                ItemContacto(contacto, renderContacts)
+            );
+        });
+    }
+
+    renderContacts();
 
     sectionContactos.appendChild(listaDiv);
 

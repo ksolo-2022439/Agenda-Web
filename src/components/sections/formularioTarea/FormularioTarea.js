@@ -8,14 +8,14 @@ let FormularioTarea = (redireccionar) => {
     titulo.textContent = "Nueva Tarea";
     form.appendChild(titulo);
 
-    let divTitulo = document.createElement("div");
-    divTitulo.className = "input-group-tarea";
-    let inputTitulo = document.createElement("input");
-    inputTitulo.type = "text";
-    inputTitulo.placeholder = "Título de la tarea";
-    inputTitulo.required = true;
-    divTitulo.appendChild(inputTitulo);
-    form.appendChild(divTitulo);
+    let divNombre = document.createElement("div");
+    divNombre.className = "input-group-tarea";
+    let inputNombre = document.createElement("input");
+    inputNombre.type = "text";
+    inputNombre.placeholder = "Nombre de la tarea";
+    inputNombre.required = true;
+    divNombre.appendChild(inputNombre);
+    form.appendChild(divNombre);
 
     let divDesc = document.createElement("div");
     divDesc.className = "input-group-tarea";
@@ -25,6 +25,14 @@ let FormularioTarea = (redireccionar) => {
     inputDesc.required = true;
     divDesc.appendChild(inputDesc);
     form.appendChild(divDesc);
+
+    let divFecha = document.createElement("div");
+    divFecha.className = "input-group-tarea";
+    let inputFecha = document.createElement("input");
+    inputFecha.type = "date";
+    inputFecha.required = true;
+    divFecha.appendChild(inputFecha);
+    form.appendChild(divFecha);
 
     let button = document.createElement("button");
     button.type = "submit";
@@ -37,8 +45,9 @@ let FormularioTarea = (redireccionar) => {
         e.preventDefault();
         
         let nuevaTarea = {
-            titulo: inputTitulo.value,
+            nombre: inputNombre.value,
             descripcion: inputDesc.value,
+            fecha: inputFecha.value,
             completada: false
         };
 

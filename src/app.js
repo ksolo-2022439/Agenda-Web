@@ -1,31 +1,24 @@
 import { Button } from "./components/common/button/Button.js";
-import { Contactos } from "./components/sections/contactos/Contactos.js";
-import { FormularioContacto } from "./components/sections/formulario/FormularioContacto.js";
-import { ToDoList } from "./components/sections/todoList/ToDoList.js";
-import { FormularioTarea } from "./components/sections/formularioTarea/FormularioTarea.js";
+import { viewContacts, viewNewContacts, viewToDo, viewNewTask } from "../src/components/layout/nav/NavController.js";
 
 let app = document.getElementById("app");
 let nav = document.getElementById("nav");
 let container = document.getElementById("container");
 
 const loadAgenda = () => {
-    container.innerHTML = "";
-    container.appendChild(Contactos());
+    viewContacts(container);
 };
 
 const loadFormulario = () => {
-    container.innerHTML = "";
-    container.appendChild(FormularioContacto(loadAgenda));
+    viewNewContacts(container, loadAgenda);
 };
 
 const loadToDo = () => {
-    container.innerHTML = "";
-    container.appendChild(ToDoList());
+    viewToDo(container);
 };
 
 const loadFormularioTarea = () => {
-    container.innerHTML = "";
-    container.appendChild(FormularioTarea(loadToDo));
+    viewNewTask(container, loadToDo);
 };
 
 nav.appendChild(Button("Agenda", "agenda", "list.svg", loadAgenda));

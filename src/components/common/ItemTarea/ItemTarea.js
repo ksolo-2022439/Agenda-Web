@@ -16,48 +16,76 @@ let ItemTarea = (tarea, recargarLista) => {
     let divContenido = document.createElement("div");
     divContenido.className = "contenido-tarea";
 
-    let divIcono = document.createElement("div");
-    divIcono.className = "icon-container";
-    
-    let imgIcon = document.createElement("img");
-    imgIcon.src = "./assets/icons/list.svg";
-    divIcono.appendChild(imgIcon);
-
     let divInfo = document.createElement("div");
     divInfo.className = "info-tarea";
 
-    let etiquetaTitulo = document.createElement("h4");
-    etiquetaTitulo.textContent = tarea.titulo;
+    let etiquetaNombre = document.createElement("h4");
+    etiquetaNombre.textContent = tarea.nombre;
 
     let etiquetaDesc = document.createElement("p");
     etiquetaDesc.textContent = tarea.descripcion;
+    
+    let etiquetaFecha = document.createElement("span");
+    etiquetaFecha.className = "fecha-tarea";
 
-    divInfo.appendChild(etiquetaTitulo);
+    etiquetaFecha.textContent = `Fecha: ${tarea.fecha}`;
+
+    divInfo.appendChild(etiquetaNombre);
     divInfo.appendChild(etiquetaDesc);
+    divInfo.appendChild(etiquetaFecha);
 
-    divContenido.appendChild(divIcono);
     divContenido.appendChild(divInfo);
+
+    let btnBorrar = document.createElement("button");
+    btnBorrar.className = "btn-borrar-tarea";
+    let imgBorrar = document.createElement("img");
+    imgBorrar.src = "./assets/icons/trash.svg";
+    btnBorrar.appendChild(imgBorrar);
 
     div.appendChild(checkbox);
     div.appendChild(divContenido);
+    div.appendChild(btnBorrar);
 
     checkbox.addEventListener("change", () => {
-        div.classList.add("salida-animada");
+        div.style.opacity = "0.5";
+        
         setTimeout(() => {
             let currentList = getTasksFromStorage();
             
             let targetIndex = currentList.findIndex(t => 
-                t.titulo === tarea.titulo && t.descripcion === tarea.descripcion
+                t.nombre === tarea.nombre && 
+                t.descripcion === tarea.descripcion &&
+                t.fecha === tarea.fecha
             );
 
             if (targetIndex !== -1) {
                 currentList[targetIndex].completada = checkbox.checked;
-                currentList.sort((a, b) => a.completada - b.completada);
                 saveTasksToStorage(currentList);
+                if (recargarLista) recargarLista();
             }
-            if (recargarLista) recargarLista();
+        }, 300); 
+    });
 
-        }, 150); 
+    btnBorrar.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if(confirm("¿Estás seguro de borrar esta tarea?")) {
+            div.classList.add("salida-animada");
+            setTimeout(() => {
+                let currentList = getTasksFromStorage();
+                
+                let targetIndex = currentList.findIndex(t => 
+                    t.nombre === tarea.nombre && 
+                    t.descripcion === tarea.descripcion &&
+                    t.fecha === tarea.fecha
+                );
+
+                if (targetIndex !== -1) {
+                    currentList.splice(targetIndex, 1);
+                    saveTasksToStorage(currentList);
+                    if (recargarLista) recargarLista();
+                }
+            }, 300);
+        }
     });
 
     return div;
