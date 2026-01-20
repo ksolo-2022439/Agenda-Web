@@ -1,4 +1,4 @@
-import { TaskList } from "../contactos/db.js";
+import { getTasksFromStorage, saveTasksToStorage } from "../../../storage/storage.js";
 
 let FormularioTarea = (redireccionar) => {
     let form = document.createElement("form");
@@ -38,10 +38,13 @@ let FormularioTarea = (redireccionar) => {
         
         let nuevaTarea = {
             titulo: inputTitulo.value,
-            descripcion: inputDesc.value
+            descripcion: inputDesc.value,
+            completada: false
         };
 
-        TaskList.push(nuevaTarea);
+        let taskList = getTasksFromStorage();
+        taskList.push(nuevaTarea);
+        saveTasksToStorage(taskList);
         
         if(redireccionar) redireccionar();
     });

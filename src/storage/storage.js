@@ -1,4 +1,7 @@
-let ContactList = [
+const LOCAL_STORAGE_KEY = 'agenda_telefonica';
+const LOCAL_STORAGE_TASK_KEY = 'agenda_tareas';
+
+const initialContacts = [
     { nombre: "Juan", apellido: "Perez", telefono: "12345678" },
     { nombre: "María", apellido: "Gómez", telefono: "23456789" },
     { nombre: "Carlos", apellido: "López", telefono: "34567890" },
@@ -21,10 +24,41 @@ let ContactList = [
     { nombre: "Natalia", apellido: "Cruz", telefono: "12131415" }
 ];
 
-let TaskList = [
-    { titulo: "Comprar suministros", descripcion: "Papel, tinta y café" },
-    { titulo: "Reunión de equipo", descripcion: "Viernes a las 10:00 AM" },
-    { titulo: "Actualizar sitio web", descripcion: "Subir cambios al repositorio" }
+const initialTasks = [
+    { titulo: "Comprar suministros", descripcion: "Papel, tinta y café", completada: false },
+    { titulo: "Reunión de equipo", descripcion: "Viernes a las 10:00 AM", completada: false },
+    { titulo: "Actualizar sitio web", descripcion: "Subir cambios al repositorio", completada: false }
 ];
 
-export { ContactList, TaskList };
+function saveContactsToStorage(contactos) {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contactos));
+}
+
+function getContactsFromStorage() {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!stored) {
+        saveContactsToStorage(initialContacts);
+        return initialContacts;
+    }
+    return JSON.parse(stored);
+}
+
+function saveTasksToStorage(tareas) {
+    localStorage.setItem(LOCAL_STORAGE_TASK_KEY, JSON.stringify(tareas));
+}
+
+function getTasksFromStorage() {
+    const stored = localStorage.getItem(LOCAL_STORAGE_TASK_KEY);
+    if (!stored) {
+        saveTasksToStorage(initialTasks);
+        return initialTasks;
+    }
+    return JSON.parse(stored);
+}
+
+export { 
+    saveContactsToStorage, 
+    getContactsFromStorage,
+    saveTasksToStorage,
+    getTasksFromStorage 
+};

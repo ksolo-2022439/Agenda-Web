@@ -1,10 +1,17 @@
-let ItemTarea = (titulo, descripcion) => { 
+import { getTasksFromStorage, saveTasksToStorage } from "../../../storage/storage.js";
+
+let ItemTarea = (tarea, recargarLista) => { 
     let div = document.createElement("div");
     div.className = "item-tarea";
+
+    if (tarea.completada) {
+        div.classList.add("completada");
+    }
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.className = "checkbox-tarea";
+    checkbox.checked = tarea.completada;
 
     let divContenido = document.createElement("div");
     divContenido.className = "contenido-tarea";
@@ -20,10 +27,10 @@ let ItemTarea = (titulo, descripcion) => {
     divInfo.className = "info-tarea";
 
     let etiquetaTitulo = document.createElement("h4");
-    etiquetaTitulo.textContent = titulo;
+    etiquetaTitulo.textContent = tarea.titulo;
 
     let etiquetaDesc = document.createElement("p");
-    etiquetaDesc.textContent = descripcion;
+    etiquetaDesc.textContent = tarea.descripcion;
 
     divInfo.appendChild(etiquetaTitulo);
     divInfo.appendChild(etiquetaDesc);
@@ -35,11 +42,22 @@ let ItemTarea = (titulo, descripcion) => {
     div.appendChild(divContenido);
 
     checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-            div.classList.add("completada");
-        } else {
-            div.classList.remove("completada");
-        }
+        div.classList.add("salida-animada");
+        setTimeout(() => {
+            let currentList = getTasksFromStorage();
+            
+            let targetIndex = currentList.findIndex(t => 
+                t.titulo === tarea.titulo && t.descripcion === tarea.descripcion
+            );
+
+            if (targetIndex !== -1) {
+                currentList[targetIndex].completada = checkbox.checked;
+                currentList.sort((a, b) => a.completada - b.completada);
+                saveTasksToStorage(currentList);
+            }
+            if (recargarLista) recargarLista();
+
+        }, 150); 
     });
 
     return div;

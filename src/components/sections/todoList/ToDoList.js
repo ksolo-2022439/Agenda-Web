@@ -1,5 +1,5 @@
-import { ItemTarea } from "../../common/itemTarea/ItemTarea.js";
-import { TaskList } from "../contactos/db.js";
+import { ItemTarea } from "../../common/ItemTarea/ItemTarea.js";
+import { getTasksFromStorage } from "../../../storage/storage.js";
 
 let ToDoList = () => {
     let sectionTareas = document.createElement("section");
@@ -17,11 +17,20 @@ let ToDoList = () => {
     let listaDiv = document.createElement("div");
     listaDiv.className = "lista-tareas-container";
 
-    TaskList.forEach(tarea => {
-        listaDiv.appendChild(
-            ItemTarea(tarea.titulo, tarea.descripcion)
-        );
-    });
+    const renderTasks = () => {
+        listaDiv.innerHTML = "";
+
+        let taskList = getTasksFromStorage();
+        taskList.sort((a, b) => a.completada - b.completada);
+
+        taskList.forEach(tarea => {
+            const item = ItemTarea(tarea, renderTasks);
+            item.classList.add("item-tarea-wrapper");
+            listaDiv.appendChild(item);
+        });
+    };
+
+    renderTasks();
 
     sectionTareas.appendChild(listaDiv);
 

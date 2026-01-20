@@ -1,4 +1,4 @@
-import { ContactList } from "../contactos/db.js";
+import { getContactsFromStorage, saveContactsToStorage } from "../../../storage/storage.js";
 
 let FormularioContacto = (redireccionar) => {
     let form = document.createElement("form");
@@ -51,7 +51,9 @@ let FormularioContacto = (redireccionar) => {
             telefono: inputTelefono.value
         };
 
-        ContactList.push(nuevoContacto);
+        let contactList = getContactsFromStorage();
+        contactList.push(nuevoContacto);
+        saveContactsToStorage(contactList);
         
         if(redireccionar) redireccionar();
     });
