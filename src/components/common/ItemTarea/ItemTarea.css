@@ -3,6 +3,7 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -20,9 +21,7 @@
     border-radius: var(--radius-md);
     border-left: 5px solid var(--primary-color);
     box-shadow: var(--shadow-sm);
-    
     transition: all 0.3s ease-in-out;
-    
     animation: fadeInSlide 0.4s ease-out forwards;
 }
 
@@ -35,7 +34,7 @@
     opacity: 0;
     pointer-events: none;
 }
-  
+
 .item-tarea:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
@@ -121,10 +120,39 @@
     color: var(--text-main);
     margin: 0;
 }
-  
+
 .item-tarea p {
     font-size: 0.9rem;
     color: var(--text-secondary);
     margin: 0;
     line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+    .item-tarea {
+        padding: 14px 16px;
+        gap: 1rem;
+    }
+
+    .contenido-tarea {
+        gap: 1rem;
+    }
+
+    .icon-container {
+        min-width: 36px;
+        height: 36px;
+    }
+
+    .icon-container img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .item-tarea h4 {
+        font-size: 1rem;
+    }
+
+    .item-tarea p {
+        font-size: 0.85rem;
+    }
 }

@@ -5,6 +5,7 @@
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-md);
     max-width: 500px;
+    width: 100%;
     margin: 20px auto;
 }
 
@@ -58,4 +59,21 @@
 
 .btn-crear-tarea:active {
     transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+    .formulario-tarea {
+        padding: 20px;
+        margin: 10px auto;
+        border-radius: 12px;
+    }
+
+    .formulario-tarea h3 {
+        margin-bottom: 20px;
+        font-size: 1.25rem;
+    }
+
+    .input-group-tarea input {
+        padding: 12px 14px;
+    }
 }

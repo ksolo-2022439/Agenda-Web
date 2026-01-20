@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .contactos h2 {
@@ -27,4 +29,10 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
+}
+
+@media (max-width: 640px) {
+  .contactos h2 {
+    font-size: 1.5rem;
+  }
 }

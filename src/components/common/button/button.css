@@ -11,7 +11,7 @@
   box-shadow: var(--shadow-sm);
   color: var(--text-secondary);
   cursor: pointer;
-    transition:
+  transition:
     transform 0.1s ease,
     box-shadow 0.1s ease,
     color 0.15s ease,
@@ -40,6 +40,7 @@
 .button-text {
   font-size: 1rem;
   margin: 0;
+  white-space: nowrap;
 }
 
 .custom-button:hover {
@@ -57,4 +58,23 @@
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
   background-color: #f8fafc;
+}
+
+@media (max-width: 768px) {
+  .custom-button {
+    padding: 12px 16px;
+    margin-bottom: 0;
+    justify-content: center;
+    min-width: fit-content;
+  }
+
+  .button-image {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .button-text {
+    font-size: 0.9rem;
+  }
 }
