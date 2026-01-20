@@ -63,7 +63,7 @@ let ItemTarea = (tarea, recargarLista) => {
                 saveTasksToStorage(currentList);
                 if (recargarLista) recargarLista();
             }
-        }, 300); 
+        }, 150); 
     });
 
     btnBorrar.addEventListener("click", (e) => {
@@ -84,7 +84,7 @@ let ItemTarea = (tarea, recargarLista) => {
                     saveTasksToStorage(currentList);
                     if (recargarLista) recargarLista();
                 }
-            }, 300);
+            }, 150);
         }
     });
 
