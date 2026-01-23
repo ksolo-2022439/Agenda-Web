@@ -21,7 +21,8 @@
     margin-bottom: 20px;
 }
 
-.input-group-tarea input {
+.input-group-tarea input,
+.input-group-tarea select {
     width: 100%;
     padding: 14px 18px;
     border: 2px solid #e5e7eb;
@@ -29,9 +30,12 @@
     font-size: 1rem;
     background-color: #f9fafb;
     transition: all 0.2s;
+    font-family: inherit;
+    color: var(--text-main);
 }
 
-.input-group-tarea input:focus {
+.input-group-tarea input:focus,
+.input-group-tarea select:focus {
     outline: none;
     border-color: var(--primary-color);
     background-color: #fff;
@@ -73,7 +77,8 @@
         font-size: 1.25rem;
     }
 
-    .input-group-tarea input {
+    .input-group-tarea input,
+    .input-group-tarea select {
         padding: 12px 14px;
     }
 }

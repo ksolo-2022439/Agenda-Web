@@ -1,6 +1,6 @@
 import { getContactsFromStorage, saveContactsToStorage } from "../../../storage/storage.js";
 
-let ItemContacto = (contacto, recargarLista) => { 
+let ItemContacto = (contacto, recargarLista, verDetalle) => { 
     let div = document.createElement("div");
     div.className = "item-contacto";
 
@@ -34,7 +34,15 @@ let ItemContacto = (contacto, recargarLista) => {
     div.appendChild(divInfo);
     div.appendChild(btnBorrar);
 
-    btnBorrar.addEventListener("click", () => {
+    if (verDetalle) {
+        divInfo.style.cursor = "pointer";
+        divInfo.addEventListener("click", () => {
+            verDetalle(contacto);
+        });
+    }
+
+    btnBorrar.addEventListener("click", (e) => {
+        e.stopPropagation();
         if(confirm(`¿Eliminar a ${contacto.nombre} ${contacto.apellido}?`)) {
             let currentList = getContactsFromStorage();
 

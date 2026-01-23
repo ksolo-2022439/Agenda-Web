@@ -1,7 +1,7 @@
 import { ItemTarea } from "../../common/ItemTarea/ItemTarea.js";
 import { getTasksFromStorage } from "../../../storage/storage.js";
 
-let ToDoList = () => {
+let ToDoList = (onEdit) => {
     let sectionTareas = document.createElement("section");
     sectionTareas.className = "todo-list";
 
@@ -17,12 +17,23 @@ let ToDoList = () => {
     let listaDiv = document.createElement("div");
     listaDiv.className = "lista-tareas-container";
 
+    const priorityMap = {
+        "Alta": 1,
+        "Media": 2,
+        "Baja": 3
+    };
+
     const renderTasks = () => {
         listaDiv.innerHTML = "";
 
         let taskList = getTasksFromStorage();
 
-        taskList.sort((a, b) => a.completada - b.completada);
+        taskList.sort((a, b) => {
+            if (a.completada !== b.completada) {
+                return a.completada - b.completada;
+            }
+            return priorityMap[a.prioridad] - priorityMap[b.prioridad];
+        });
 
         if (taskList.length === 0) {
             let emptyMsg = document.createElement("p");
@@ -33,7 +44,7 @@ let ToDoList = () => {
         }
 
         taskList.forEach(tarea => {
-            const item = ItemTarea(tarea, renderTasks);
+            const item = ItemTarea(tarea, renderTasks, onEdit);
             listaDiv.appendChild(item);
         });
     };

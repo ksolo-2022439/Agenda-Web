@@ -1,6 +1,6 @@
 import { getTasksFromStorage, saveTasksToStorage } from "../../../storage/storage.js";
 
-let ItemTarea = (tarea, recargarLista) => { 
+let ItemTarea = (tarea, recargarLista, onEdit) => { 
     let div = document.createElement("div");
     div.className = "item-tarea";
 
@@ -19,22 +19,40 @@ let ItemTarea = (tarea, recargarLista) => {
     let divInfo = document.createElement("div");
     divInfo.className = "info-tarea";
 
+    let headerInfo = document.createElement("div");
+    headerInfo.className = "header-info-tarea";
+
     let etiquetaNombre = document.createElement("h4");
     etiquetaNombre.textContent = tarea.nombre;
+
+    let badgePrioridad = document.createElement("span");
+    badgePrioridad.className = `badge-prioridad ${tarea.prioridad.toLowerCase()}`;
+    badgePrioridad.textContent = tarea.prioridad;
+
+    headerInfo.appendChild(etiquetaNombre);
+    headerInfo.appendChild(badgePrioridad);
 
     let etiquetaDesc = document.createElement("p");
     etiquetaDesc.textContent = tarea.descripcion;
     
     let etiquetaFecha = document.createElement("span");
     etiquetaFecha.className = "fecha-tarea";
-
     etiquetaFecha.textContent = `Fecha: ${tarea.fecha}`;
 
-    divInfo.appendChild(etiquetaNombre);
+    divInfo.appendChild(headerInfo);
     divInfo.appendChild(etiquetaDesc);
     divInfo.appendChild(etiquetaFecha);
 
     divContenido.appendChild(divInfo);
+
+    let accionesDiv = document.createElement("div");
+    accionesDiv.className = "acciones-tarea";
+
+    let btnEditar = document.createElement("button");
+    btnEditar.className = "btn-editar-tarea";
+    let imgEditar = document.createElement("img");
+    imgEditar.src = "./assets/icons/edit.svg"; 
+    btnEditar.appendChild(imgEditar);
 
     let btnBorrar = document.createElement("button");
     btnBorrar.className = "btn-borrar-tarea";
@@ -42,9 +60,12 @@ let ItemTarea = (tarea, recargarLista) => {
     imgBorrar.src = "./assets/icons/trash.svg";
     btnBorrar.appendChild(imgBorrar);
 
+    accionesDiv.appendChild(btnEditar);
+    accionesDiv.appendChild(btnBorrar);
+
     div.appendChild(checkbox);
     div.appendChild(divContenido);
-    div.appendChild(btnBorrar);
+    div.appendChild(accionesDiv);
 
     checkbox.addEventListener("change", () => {
         div.style.opacity = "0.5";
@@ -64,6 +85,10 @@ let ItemTarea = (tarea, recargarLista) => {
                 if (recargarLista) recargarLista();
             }
         }, 150); 
+    });
+
+    btnEditar.addEventListener("click", () => {
+        if (onEdit) onEdit(tarea);
     });
 
     btnBorrar.addEventListener("click", (e) => {

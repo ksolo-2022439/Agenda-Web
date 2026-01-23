@@ -1,7 +1,7 @@
 import { ItemContacto } from "../../common/itemContacto/itemContacto.js";
 import { getContactsFromStorage } from "../../../storage/storage.js";
 
-let Contactos = () => {
+let Contactos = (verDetalle) => {
     let sectionContactos = document.createElement("section");
     sectionContactos.className = "contactos";
 
@@ -31,7 +31,7 @@ let Contactos = () => {
 
         contactosLista.forEach(contacto => {
             listaDiv.appendChild(
-                ItemContacto(contacto, renderContacts)
+                ItemContacto(contacto, renderContacts, verDetalle)
             );
         });
     }
